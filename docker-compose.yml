@@ -4,30 +4,31 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_cart/Dockerfile
+    env_file: ../VerreTech-BackEnd/.env
     ports:
       - "7000:7000"
     image: cart
-
   token:
     build:
       context: .
       dockerfile: Dockerfile_token/Dockerfile
+    env_file: ../VerreTech-BackEnd/.env
     ports:
       - "4000:4000"
     image: token
-
   user:
     build:
       context: .
       dockerfile: Dockerfile_user/Dockerfile
+    env_file: ../VerreTech-BackEnd/.env
     ports:
       - "6500:6500"
     image: user
-
   product:
     build:
       context: .
       dockerfile: Dockerfile_product/Dockerfile
+    env_file: ../VerreTech-BackEnd/.env
     ports:
       - "5000:5000"
     image: product
