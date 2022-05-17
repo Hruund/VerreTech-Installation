@@ -20,6 +20,16 @@ echo ------------------
 cd /var/lib/VerreTech/
 yarn install
 echo \n
+echo Set-Up and Front IP
+echo ------------------
+touch .env
+echo -e "VUE_APP_SERVER_IP=localhost
+VUE_APP_TOKEN_PORT=4000
+VUE_APP_PRODUCT_PORT=5000
+VUE_APP_USER_PORT=6500
+VUE_APP_CART_PORT=7000" >> .env
+ip=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
+sed -i "s/localhost/$ip/g" .env
 echo Build du front-end
 echo ------------------
 yarn build
