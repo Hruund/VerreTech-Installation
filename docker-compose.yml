@@ -6,7 +6,6 @@ services:
       dockerfile: Dockerfile_cart/Dockerfile
     ports:
       - "7000:7000"
-      - "3306:3306"
     image: cart
 
   token:
@@ -15,7 +14,6 @@ services:
       dockerfile: Dockerfile_token/Dockerfile
     ports:
       - "4000:4000"
-      - "3306:3306"
     image: token
 
   user:
@@ -24,7 +22,6 @@ services:
       dockerfile: Dockerfile_user/Dockerfile
     ports:
       - "6500:6500"
-      - "3306:3306"
     image: user
 
   product:
@@ -33,5 +30,4 @@ services:
       dockerfile: Dockerfile_product/Dockerfile
     ports:
       - "5000:5000"
-      - "3306:3306"
     image: product
