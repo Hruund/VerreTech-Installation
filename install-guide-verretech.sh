@@ -1,32 +1,38 @@
-echo ------------------
-echo INSTALLATION FRONT
-echo ------------------
-echo \n
+echo -------------------------------------------
+echo INSTALLATION VERRETECH FRONTEND AND BACKEND
+echo -------------------------------------------
+echo -------------------------------------------
+echo -e "\n"
+echo PLEASE, ENTER YOUR MYSQL PASSWORD ON ROOT TO CREATE DATABASE AND SETUP VERRETECH DATABASE
+read -sp 'Password: ' mysqlpass
+echo -e "\n"
 echo Installation Apache2 and Yarn
-echo ------------------
+echo -------------------------------------------
 apt-get install apache2 -y
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update
 sudo apt-get install yarn -y
-echo \n
+echo -e "\n"
 echo Clone repo
-echo ------------------
+echo -------------------------------------------
 cd /var/lib/
 git clone https://github.com/Hruund/VerreTech.git
-echo \n
+echo -e "\n"
 echo Initialisation de yarn
-echo ------------------
+echo -------------------------------------------
 cd /var/lib/VerreTech/
 yarn install
-echo \n
+echo -e "\n"
 echo MYSQL Set-Up
-echo ------------------
-mysql -uroot -p -e "create database verretech"
-mysql -uroot -p verretech < verretech.sql
-echo \n
+echo -------------------------------------------
+mysql -uroot -p"$mysqlpass" -e "CREATE DATABASE verretech"
+mysql -uroot -p"$mysqlpass" verretech < /var/lib/VerreTech-Installation/verretech.sql
+mysql -uroot -p"$mysqlpass" -e "CREATE USER 'back'@'54.36.191.244' IDENTIFIED BY 'VerreTech@2021';"
+mysql -uroot -p"$mysqlpass" -e "GRANT ALL PRIVILEGES ON *.* TO 'back'@'54.36.191.244' WITH GRANT OPTION;"
+echo -e "\n"
 echo Set-Up and Front IP
-echo ------------------
+echo -------------------------------------------
 touch .env
 echo -e "VUE_APP_SERVER_IP=localhost
 VUE_APP_TOKEN_PORT=4000
@@ -36,11 +42,11 @@ VUE_APP_CART_PORT=7000" >> .env
 ip=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
 sed -i "s/localhost/$ip/g" .env
 echo Build du front-end
-echo ------------------
+echo -------------------------------------------
 yarn build
-echo \n
+echo -e "\n"
 echo Transfere sur apache2
-echo ------------------
+echo -------------------------------------------
 cp -a /var/lib/VerreTech/dist/. /var/www/html/verretech/
 touch /etc/apache2/sites-available/verretech.conf
 echo -e "<VirtualHost *:80>\n
@@ -53,9 +59,9 @@ echo -e "<VirtualHost *:80>\n
 </VirtualHost>" >> /etc/apache2/sites-available/verretech.conf
 sudo a2ensite verretech.conf
 sudo systemctl reload apache2
-echo\n
+echo -e "\n"
 echo BackEnd Installation
-echo ------------------
+echo -------------------------------------------
 apt-get install docker -y
 apt-get install docker-compose -y
 cd /var/lib/VerreTech-Installation/
