@@ -9,9 +9,9 @@ RUN echo "PORT_USER = 6500" >> ./VerreTech-BackEnd/.env
 RUN echo "PORT_TOKEN = 4000" >> ./VerreTech-BackEnd/.env
 RUN echo "PORT_CART = 7000" >> ./VerreTech-BackEnd/.env
 RUN echo "PORT_PRODUCT = 5000" >> ./VerreTech-BackEnd/.env
-RUN echo "HOSTNAME_DDB = 'localhost'" >> ./VerreTech-BackEnd/.env
-RUN echo "USERNAME_DDB = 'docker'" >> ./VerreTech-BackEnd/.env
-RUN echo "PASSWORD_DDB = 'VerreTech!2021'" >> ./VerreTech-BackEnd/.env
+RUN echo "HOSTNAME_DDB = '54.36.191.244'" >> ./VerreTech-BackEnd/.env
+RUN echo "USERNAME_DDB = 'back'" >> ./VerreTech-BackEnd/.env
+RUN echo "PASSWORD_DDB = 'VerreTech@2021'" >> ./VerreTech-BackEnd/.env
 RUN echo "DATABASE_DDB = 'verretech'" >> ./VerreTech-BackEnd/.env
 RUN echo "PASSPHRASE = 'SUPERBE PHRASE DENCRYPTAGE'" >> ./VerreTech-BackEnd/.env
 RUN node ./VerreTech-BackEnd/token.js
