@@ -20,6 +20,12 @@ echo ------------------
 cd /var/lib/VerreTech/
 yarn install
 echo \n
+echo MYSQL Installation Set-Up
+echo ------------------
+apt-get install mysql
+mysql -uroot -p -e "create database verretech"
+mysql -uroot -p verretech < verretech.sql
+echo \n
 echo Set-Up and Front IP
 echo ------------------
 touch .env
@@ -48,3 +54,10 @@ echo -e "<VirtualHost *:80>\n
 </VirtualHost>" >> /etc/apache2/sites-available/verretech.conf
 sudo a2ensite verretech.conf
 sudo systemctl reload apache2
+echo\n
+echo BackEnd Installation
+echo ------------------
+apt-get install docker
+apt-get install docker-compose
+cd /var/lib/VerreTech-Installation/
+docker-compose up
