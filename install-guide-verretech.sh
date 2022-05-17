@@ -20,9 +20,8 @@ echo ------------------
 cd /var/lib/VerreTech/
 yarn install
 echo \n
-echo MYSQL Installation Set-Up
+echo MYSQL Set-Up
 echo ------------------
-apt-get install mysql
 mysql -uroot -p -e "create database verretech"
 mysql -uroot -p verretech < verretech.sql
 echo \n
@@ -57,8 +56,8 @@ sudo systemctl reload apache2
 echo\n
 echo BackEnd Installation
 echo ------------------
-apt-get install docker
-apt-get install docker-compose
+apt-get install docker -y
+apt-get install docker-compose -y
 cd /var/lib/VerreTech-Installation/
 sed -i "s/localhost/$ip/g" Dockerfile_cart/Dockerfile
 sed -i "s/localhost/$ip/g" Dockerfile_product/Dockerfile
