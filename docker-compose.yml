@@ -1,0 +1,37 @@
+version: "3"
+services:
+  cart:
+    build:
+      context: .
+      dockerfile: Dockerfile_cart/Dockerfile
+    ports:
+      - "7000:7000"
+      - "3306:3306"
+    image: cart
+
+  token:
+    build:
+      context: .
+      dockerfile: Dockerfile_token/Dockerfile
+    ports:
+      - "4000:4000"
+      - "3306:3306"
+    image: token
+
+  user:
+    build:
+      context: .
+      dockerfile: Dockerfile_user/Dockerfile
+    ports:
+      - "6500:6500"
+      - "3306:3306"
+    image: user
+
+  product:
+    build:
+      context: .
+      dockerfile: Dockerfile_product/Dockerfile
+    ports:
+      - "5000:5000"
+      - "3306:3306"
+    image: product
