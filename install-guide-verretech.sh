@@ -65,8 +65,18 @@ echo -------------------------------------------
 apt-get install docker -y
 apt-get install docker-compose -y
 cd /var/lib/VerreTech-Installation/
+touch .env
+echo -e "PORT_TOKEN = 4000
+PORT_PRODUCT = 5000
+PORT_USER = 6500
+PORT_CART = 7000
+HOSTNAME_DDB = '$ip'
+USERNAME_DDB = 'back'
+PASSWORD_DDB = 'VerreTech@2021'
+DATABASE_DDB = 'verretech'
+PASSPHRASE = 'SUPERBE PHRASE DENCRYPTAGE'" >> .env
 sed -i "s/localhost/$ip/g" Dockerfile_cart/Dockerfile
 sed -i "s/localhost/$ip/g" Dockerfile_product/Dockerfile
 sed -i "s/localhost/$ip/g" Dockerfile_token/Dockerfile
 sed -i "s/localhost/$ip/g" Dockerfile_user/Dockerfile
-docker-compose up
+docker-compose up -d
