@@ -22,11 +22,12 @@ git clone https://github.com/Hruund/VerreTech.git
 cd /var/lib/VerreTech/
 git pull
 touch .env
-echo -e "VUE_APP_SERVER_IP=$ip
+echo -e "VUE_APP_SERVER_IP=localhost
 VUE_APP_TOKEN_PORT=4000
 VUE_APP_PRODUCT_PORT=5000
 VUE_APP_USER_PORT=6500
 VUE_APP_CART_PORT=7000" >> .env
+sed -i "s/localhost/$ip/g" .env
 echo -e "\n"
 echo Initialisation de yarn
 echo -------------------------------------------
