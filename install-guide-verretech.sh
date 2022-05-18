@@ -28,8 +28,8 @@ echo MYSQL Set-Up
 echo -------------------------------------------
 mysql -uroot -p"$mysqlpass" -e "CREATE DATABASE verretech"
 mysql -uroot -p"$mysqlpass" verretech < /var/lib/VerreTech-Installation/verretech.sql
-mysql -uroot -p"$mysqlpass" -e "CREATE USER 'back'@'54.36.191.244' IDENTIFIED BY 'VerreTech@2021';"
-mysql -uroot -p"$mysqlpass" -e "GRANT ALL PRIVILEGES ON *.* TO 'back'@'54.36.191.244' WITH GRANT OPTION;"
+mysql -uroot -p"$mysqlpass" -e "CREATE USER 'back'@'%' IDENTIFIED BY 'VerreTech@2021';"
+mysql -uroot -p"$mysqlpass" -e "GRANT ALL PRIVILEGES ON *.* TO 'back'@'%' WITH GRANT OPTION;"
 echo -e "\n"
 echo Set-Up and Front IP
 echo -------------------------------------------
