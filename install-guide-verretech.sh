@@ -80,3 +80,5 @@ sed -i "s/localhost/$ip/g" Dockerfile_product/Dockerfile
 sed -i "s/localhost/$ip/g" Dockerfile_token/Dockerfile
 sed -i "s/localhost/$ip/g" Dockerfile_user/Dockerfile
 docker-compose up -d
+docker build
+docker-compose up -d
