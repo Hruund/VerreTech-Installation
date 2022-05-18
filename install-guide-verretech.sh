@@ -28,13 +28,13 @@ VUE_APP_PRODUCT_PORT=5000
 VUE_APP_USER_PORT=6500
 VUE_APP_CART_PORT=7000" >> .env
 echo -e "\n"
-echo Build du front-end
-echo -------------------------------------------
-yarn build
-echo -e "\n"
 echo Initialisation de yarn
 echo -------------------------------------------
 yarn install
+echo -e "\n"
+echo Build du front-end
+echo -------------------------------------------
+yarn build
 echo -e "\n"
 echo MYSQL Set-Up
 echo -------------------------------------------
