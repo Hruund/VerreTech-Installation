@@ -1,34 +1,39 @@
 version: "3"
+
 services:
-  cart:
+  product:
+    image: product
+    ports:
+      - 5000:5000
+    container_name: product-container
     build:
       context: .
-      dockerfile: Dockerfile_cart/Dockerfile
-    env_file: ../VerreTech-BackEnd/.env
-    ports:
-      - "7000:7000"
-    image: cart
+      dockerfile: ./Dockerfile_product/Dockerfile
+    env_file: ./.env
   token:
     build:
       context: .
-      dockerfile: Dockerfile_token/Dockerfile
-    env_file: ../VerreTech-BackEnd/.env
+      dockerfile: ./Dockerfile_token/Dockerfile
+    env_file: ./.env
     ports:
-      - "4000:4000"
+      - 4000:4000
+    container_name: token-container
     image: token
   user:
     build:
       context: .
-      dockerfile: Dockerfile_user/Dockerfile
-    env_file: ../VerreTech-BackEnd/.env
+      dockerfile: ./Dockerfile_user/Dockerfile
+    env_file: ./.env
     ports:
-      - "6500:6500"
+      - 6500:6500
+    container_name: user-container
     image: user
-  product:
+  cart:
     build:
       context: .
-      dockerfile: Dockerfile_product/Dockerfile
-    env_file: ../VerreTech-BackEnd/.env
+      dockerfile: ./Dockerfile_cart/Dockerfile
+    env_file: ./.env
     ports:
-      - "5000:5000"
-    image: product
+      - 7000:7000
+    container_name: cart-container
+    image: cart
