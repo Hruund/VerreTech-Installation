@@ -54,7 +54,7 @@ CREATE TABLE `cart` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_user` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (1,1),(2,5),(3,6),(4,8),(5,9);
+INSERT INTO `cart` VALUES (1,1),(2,5),(3,6),(4,8),(6,9);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `cart_product` (
 
 LOCK TABLES `cart_product` WRITE;
 /*!40000 ALTER TABLE `cart_product` DISABLE KEYS */;
-INSERT INTO `cart_product` VALUES (1,2,4),(4,2,1),(5,1,1),(5,2,1);
+INSERT INTO `cart_product` VALUES (1,2,4),(4,1,1);
 /*!40000 ALTER TABLE `cart_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,10 +174,11 @@ DROP TABLE IF EXISTS `order_list`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_list` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `order_table_id` int NOT NULL,
-  `product_id` int NOT NULL,
+  `order_table_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +187,7 @@ CREATE TABLE `order_list` (
 
 LOCK TABLES `order_list` WRITE;
 /*!40000 ALTER TABLE `order_list` DISABLE KEYS */;
-INSERT INTO `order_list` VALUES (1,1,1);
+INSERT INTO `order_list` VALUES (8,8,2,2),(9,9,3,4),(10,10,2,4),(11,11,13,5),(12,12,2,4),(13,13,1,1),(14,13,3,1),(15,14,1,1),(16,14,13,1);
 /*!40000 ALTER TABLE `order_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,15 +200,14 @@ DROP TABLE IF EXISTS `order_table`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_table` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_client` int NOT NULL,
-  `date` text NOT NULL,
-  `date_maj` text NOT NULL,
-  `price` float NOT NULL,
-  `order_list` int NOT NULL,
-  `shop` text NOT NULL,
-  `state` int NOT NULL,
+  `id_client` int DEFAULT NULL,
+  `date` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `date_maj` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `price` float DEFAULT NULL,
+  `shop` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `state` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ CREATE TABLE `order_table` (
 
 LOCK TABLES `order_table` WRITE;
 /*!40000 ALTER TABLE `order_table` DISABLE KEYS */;
-INSERT INTO `order_table` VALUES (1,9,'17/05/2022','17/05/2022',650,1,'Verre-Tech Paris',0);
+INSERT INTO `order_table` VALUES (8,9,'2022-05-17 12:45:26','2022-05-17 12:45:26',300,'aucun',0),(9,9,'2022-05-17 12:48:46','2022-05-17 12:48:46',600,'aucun',0),(10,9,'2022-05-17 12:50:03','2022-05-17 12:50:03',600,'aucun',0),(11,9,'2022-05-17 12:51:35','2022-05-17 12:51:35',1500,'aucun',0),(12,9,'2022-05-17 13:14:36','2022-05-17 13:14:36',600,'aucun',0),(13,9,'2022-05-18 12:39:48','2022-05-18 12:39:48',300,'aucun',0),(14,8,'2022-05-18 15:02:04','2022-05-18 15:02:04',450,'aucun',0);
 /*!40000 ALTER TABLE `order_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,6 +257,7 @@ CREATE TABLE `product` (
   `name` varchar(100) NOT NULL,
   `image` varchar(500) NOT NULL,
   `price` float NOT NULL,
+  `quantity` int NOT NULL,
   `feature` varchar(100) NOT NULL,
   `id_categorie` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -270,7 +271,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Paroi de douche Klodius','https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',150,'Paroi de douche venant du grand Klodius le grand, le petit pas le grand',1),(2,'Paroi de douche Lucius','https://images.unsplash.com/photo-1631067128367-12993e709b3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1229&q=80',150,'Paroi de douche opaque',1),(3,'Paroi de douche Ambrus','https://images.unsplash.com/photo-1629079447777-1e605162dc8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',150,'Paroi de douche porte',1),(4,'Paroi de douche Williamus','https://images.unsplash.com/photo-1585821569185-6696dc206e64?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',150,'Paroi de douche demi',1),(13,'Crédence Lumo','https://images.unsplash.com/photo-1600566752229-250ed79470f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1139&q=80',300,'Crédence apparence marbre',5),(16,'Crédence Tuto','https://images.unsplash.com/photo-1556909211-36987daf7b4d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',305,'Crédence brique',5),(17,'Cloison Bureau','https://images.unsplash.com/photo-1497366412874-3415097a27e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',650,'Longue cloison',2),(18,'Cloison Motif','https://images.unsplash.com/photo-1525570665650-76bb26af503d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',850,'Cloison décorative',2),(19,'Miroir Corida','https://images.unsplash.com/photo-1502921451607-29fa99d270d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',125,'Miroir long',4),(20,'Cloison Bureau','https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',450,'Cloison parfaite pour les bureaux',2),(22,'Insert Crema','https://images.unsplash.com/photo-1518267535284-967f6f2a6ac1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',320,'Insert cheminée large',3),(23,'Insert Fire','https://media.istockphoto.com/photos/modern-glass-corner-fireplace-in-the-interior-picture-id1082464602?k=20&m=1082464602&s=612x612&w=0&h=-oyrgPeQ0cufFpIEhzdUJcgZ535zQZEgr2ZXUBGBcco=',255,'Insert en angle résistante aux hautes températures',3);
+INSERT INTO `product` VALUES (1,'Paroi de douche Klodius','https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',150,0,'Paroi de douche venant du grand Klodius le grand, le petit pas le grand',1),(2,'Paroi de douche Lucius','https://images.unsplash.com/photo-1631067128367-12993e709b3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1229&q=80',150,0,'Paroi de douche opaque',1),(3,'Paroi de douche Ambrus','https://images.unsplash.com/photo-1629079447777-1e605162dc8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',150,0,'Paroi de douche porte',1),(4,'Paroi de douche Williamus','https://images.unsplash.com/photo-1585821569185-6696dc206e64?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',150,0,'Paroi de douche demi',1),(13,'Crédence Lumo','https://images.unsplash.com/photo-1600566752229-250ed79470f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1139&q=80',300,0,'Crédence apparence marbre',5),(16,'Crédence Tuto','https://images.unsplash.com/photo-1556909211-36987daf7b4d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',305,0,'Crédence brique',5),(17,'Cloison Bureau','https://images.unsplash.com/photo-1497366412874-3415097a27e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',650,0,'Longue cloison',2),(18,'Cloison Motif','https://images.unsplash.com/photo-1525570665650-76bb26af503d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',850,0,'Cloison décorative',2),(19,'Miroir Corida','https://images.unsplash.com/photo-1502921451607-29fa99d270d4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',125,0,'Miroir long',4),(20,'Cloison Bureau','https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',450,0,'Cloison parfaite pour les bureaux',2),(22,'Insert Crema','https://images.unsplash.com/photo-1518267535284-967f6f2a6ac1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',320,0,'Insert cheminée large',3),(23,'Insert Fire','https://media.istockphoto.com/photos/modern-glass-corner-fireplace-in-the-interior-picture-id1082464602?k=20&m=1082464602&s=612x612&w=0&h=-oyrgPeQ0cufFpIEhzdUJcgZ535zQZEgr2ZXUBGBcco=',255,0,'Insert en angle résistante aux hautes températures',3);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -525,6 +526,10 @@ LOCK TABLES `withdrawal_point` WRITE;
 /*!40000 ALTER TABLE `withdrawal_point` DISABLE KEYS */;
 /*!40000 ALTER TABLE `withdrawal_point` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'verretech'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -535,4 +540,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-17  9:13:21
+-- Dump completed on 2022-05-18 15:09:21
