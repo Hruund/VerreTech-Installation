@@ -18,10 +18,11 @@ echo Clone repo
 echo -------------------------------------------
 cd /var/lib/
 git clone https://github.com/Hruund/VerreTech.git
+cd /var/lib/VerreTech/
+git pull
 echo -e "\n"
 echo Initialisation de yarn
 echo -------------------------------------------
-cd /var/lib/VerreTech/
 yarn install
 echo -e "\n"
 echo MYSQL Set-Up
@@ -33,14 +34,13 @@ mysql -uroot -p"$mysqlpass" -e "GRANT ALL PRIVILEGES ON *.* TO 'back'@'%' WITH G
 echo -e "\n"
 echo Set-Up and Front IP
 echo -------------------------------------------
-touch .env
-echo -e "VUE_APP_SERVER_IP=localhost
-VUE_APP_TOKEN_PORT=4000
-VUE_APP_PRODUCT_PORT=5000
-VUE_APP_USER_PORT=6500
-VUE_APP_CART_PORT=7000" >> .env
 ip=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
-sed -i "s/localhost/$ip/g" .env
+touch .env
+echo -e "VUE_APP_SERVER_IP=$ip
+VUE_APP_TOKEN_PORT=4550
+VUE_APP_PRODUCT_PORT=5000
+VUE_APP_USER_PORT=1650
+VUE_APP_CART_PORT=7000" >> .env
 echo Build du front-end
 echo -------------------------------------------
 yarn build
@@ -50,9 +50,9 @@ echo -------------------------------------------
 cp -a /var/lib/VerreTech/dist/. /var/www/html/verretech/
 touch /etc/apache2/sites-available/verretech.conf
 echo -e "<VirtualHost *:80>\n
-    ServerAdmin admin@verretech.com\n
-    ServerName 195.110.58.84\n
-    ServerAlias www.verretech.com\n
+    ServerAdmin admin@verretech.fr\n
+    ServerName $ip\n
+    ServerAlias www.verretech.fr\n
     DocumentRoot /var/www/html/verretech\n
     ErrorLog ${APACHE_LOG_DIR}/error.log\n
     CustomLog ${APACHE_LOG_DIR}/access.log combined\n
@@ -66,9 +66,9 @@ apt-get install docker -y
 apt-get install docker-compose -y
 cd /var/lib/VerreTech-Installation/
 touch .env
-echo -e "PORT_TOKEN = 4000
+echo -e "PORT_TOKEN = 4550
 PORT_PRODUCT = 5000
-PORT_USER = 6500
+PORT_USER = 1650
 PORT_CART = 7000
 HOSTNAME_DDB = '$ip'
 USERNAME_DDB = 'back'
