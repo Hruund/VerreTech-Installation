@@ -54,7 +54,7 @@ CREATE TABLE `cart` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_user` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (1,1),(2,5),(3,6),(4,8),(5,9);
+INSERT INTO `cart` VALUES (1,1),(2,5),(3,6),(4,8),(6,9);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `cart_product` (
 
 LOCK TABLES `cart_product` WRITE;
 /*!40000 ALTER TABLE `cart_product` DISABLE KEYS */;
-INSERT INTO `cart_product` VALUES (1,2,4),(4,2,1),(5,1,1),(5,2,1);
+INSERT INTO `cart_product` VALUES (1,2,4),(4,2,1);
 /*!40000 ALTER TABLE `cart_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,8 +176,9 @@ CREATE TABLE `order_list` (
   `id` int NOT NULL AUTO_INCREMENT,
   `order_table_id` int NOT NULL,
   `product_id` int NOT NULL,
+  `quantity` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +187,7 @@ CREATE TABLE `order_list` (
 
 LOCK TABLES `order_list` WRITE;
 /*!40000 ALTER TABLE `order_list` DISABLE KEYS */;
-INSERT INTO `order_list` VALUES (1,1,1);
+INSERT INTO `order_list` VALUES (8,8,2,2),(9,9,3,4),(10,10,2,4),(11,11,13,5),(12,12,2,4),(13,13,1,1),(14,13,3,1);
 /*!40000 ALTER TABLE `order_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,11 +204,10 @@ CREATE TABLE `order_table` (
   `date` text NOT NULL,
   `date_maj` text NOT NULL,
   `price` float NOT NULL,
-  `order_list` int NOT NULL,
   `shop` text NOT NULL,
   `state` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ CREATE TABLE `order_table` (
 
 LOCK TABLES `order_table` WRITE;
 /*!40000 ALTER TABLE `order_table` DISABLE KEYS */;
-INSERT INTO `order_table` VALUES (1,9,'17/05/2022','17/05/2022',650,1,'Verre-Tech Paris',0);
+INSERT INTO `order_table` VALUES (8,9,'2022-05-17 12:45:26','2022-05-17 12:45:26',300,'aucun',0),(9,9,'2022-05-17 12:48:46','2022-05-17 12:48:46',600,'aucun',0),(10,9,'2022-05-17 12:50:03','2022-05-17 12:50:03',600,'aucun',0),(11,9,'2022-05-17 12:51:35','2022-05-17 12:51:35',1500,'aucun',0),(12,9,'2022-05-17 13:14:36','2022-05-17 13:14:36',600,'aucun',0),(13,9,'2022-05-18 12:39:48','2022-05-18 12:39:48',300,'aucun',0);
 /*!40000 ALTER TABLE `order_table` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -525,6 +525,10 @@ LOCK TABLES `withdrawal_point` WRITE;
 /*!40000 ALTER TABLE `withdrawal_point` DISABLE KEYS */;
 /*!40000 ALTER TABLE `withdrawal_point` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'verretech'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -535,4 +539,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-17  9:13:21
+-- Dump completed on 2022-05-18 14:19:36
