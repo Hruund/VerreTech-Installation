@@ -2,6 +2,7 @@ echo -------------------------------------------
 echo INSTALLATION VERRETECH FRONTEND AND BACKEND
 echo -------------------------------------------
 echo -------------------------------------------
+ip=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
 echo -e "\n"
 echo PLEASE, ENTER YOUR MYSQL PASSWORD ON ROOT TO CREATE DATABASE AND SETUP VERRETECH DATABASE
 read -sp 'Password: ' mysqlpass
@@ -20,6 +21,16 @@ cd /var/lib/
 git clone https://github.com/Hruund/VerreTech.git
 cd /var/lib/VerreTech/
 git pull
+touch .env
+echo -e "VUE_APP_SERVER_IP=$ip
+VUE_APP_TOKEN_PORT=4000
+VUE_APP_PRODUCT_PORT=5000
+VUE_APP_USER_PORT=6500
+VUE_APP_CART_PORT=7000" >> .env
+echo -e "\n"
+echo Build du front-end
+echo -------------------------------------------
+yarn build
 echo -e "\n"
 echo Initialisation de yarn
 echo -------------------------------------------
@@ -31,19 +42,6 @@ mysql -uroot -p"$mysqlpass" -e "CREATE DATABASE verretech"
 mysql -uroot -p"$mysqlpass" verretech < /var/lib/VerreTech-Installation/verretech.sql
 mysql -uroot -p"$mysqlpass" -e "CREATE USER 'back'@'%' IDENTIFIED BY 'VerreTech@2021';"
 mysql -uroot -p"$mysqlpass" -e "GRANT ALL PRIVILEGES ON *.* TO 'back'@'%' WITH GRANT OPTION;"
-echo -e "\n"
-echo Set-Up and Front IP
-echo -------------------------------------------
-ip=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1)
-touch .env
-echo -e "VUE_APP_SERVER_IP=$ip
-VUE_APP_TOKEN_PORT=4550
-VUE_APP_PRODUCT_PORT=5000
-VUE_APP_USER_PORT=1650
-VUE_APP_CART_PORT=7000" >> .env
-echo Build du front-end
-echo -------------------------------------------
-yarn build
 echo -e "\n"
 echo Transfere sur apache2
 echo -------------------------------------------
@@ -66,9 +64,9 @@ apt-get install docker -y
 apt-get install docker-compose -y
 cd /var/lib/VerreTech-Installation/
 touch .env
-echo -e "PORT_TOKEN = 4550
+echo -e "PORT_TOKEN = 4000
 PORT_PRODUCT = 5000
-PORT_USER = 1650
+PORT_USER = 6500
 PORT_CART = 7000
 HOSTNAME_DDB = '$ip'
 USERNAME_DDB = 'back'
